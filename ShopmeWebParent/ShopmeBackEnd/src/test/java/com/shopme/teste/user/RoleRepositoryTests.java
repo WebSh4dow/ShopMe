@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
 public class RoleRepositoryTests {
-
     @Autowired
     private RoleRepository roleRepository;
 
@@ -44,6 +43,5 @@ public class RoleRepositoryTests {
 
         List<Roles> addRoles = Arrays.asList(roleSalesPerson,roleEditor,roleShipper,roleAssistant);
         roleRepository.saveAll(addRoles);
-
     }
 }
