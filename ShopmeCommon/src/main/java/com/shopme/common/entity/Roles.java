@@ -1,10 +1,14 @@
 package com.shopme.common.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.management.relation.Role;
 import javax.persistence.*;
 
 @Entity
 @Data
+@EqualsAndHashCode
 public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +28,11 @@ public class Roles {
         this.name = name;
         this.description = description;
     }
+
+    public Roles(Integer code){
+        super();
+        this.code = code;
+    }
+    public Roles(){}
 
 }
