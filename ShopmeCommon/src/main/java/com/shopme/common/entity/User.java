@@ -2,6 +2,7 @@ package com.shopme.common.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Data
 @Table(name = "users")
 @EqualsAndHashCode
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +32,8 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "users_roles", joinColumns = @JoinColumn(name = "user_code"),
+            inverseJoinColumns = @JoinColumn(name = "role_code")
     )
     private Set<Roles> roles = new HashSet<>();
 

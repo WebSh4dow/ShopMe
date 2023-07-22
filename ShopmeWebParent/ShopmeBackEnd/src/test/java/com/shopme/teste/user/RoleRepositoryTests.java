@@ -1,7 +1,7 @@
 package com.shopme.teste.user;
 
 import com.shopme.common.entity.Roles;
-import com.shopme.user.RoleRepository;
+import com.shopme.user.repository.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
