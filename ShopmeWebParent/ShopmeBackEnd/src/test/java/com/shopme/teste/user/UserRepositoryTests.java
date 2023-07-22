@@ -2,8 +2,7 @@ package com.shopme.teste.user;
 
 import com.shopme.common.entity.Roles;
 import com.shopme.common.entity.User;
-import com.shopme.user.UserRepository;
-import org.junit.jupiter.api.Assertions;
+import com.shopme.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -25,7 +24,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateUserWithOneRole(){
-        Roles adminRole = testEntityManager.find(Roles.class,9);
+        Roles adminRole = testEntityManager.find(Roles.class,1);
         User userTest = new User("jenkstest@gmail.com","jenks3432","Jenks","jenks user");
         userTest.addRole(adminRole);
         User savedUser = userRepository.save(userTest);
@@ -37,8 +36,8 @@ public class UserRepositoryTests {
 
         User userTest = new User("Beemo@gmail.com","beemo123","Beemo","user");
 
-        Roles roleAdmin = new Roles(9);
-        Roles roleSalesPerson = new Roles(10);
+        Roles roleAdmin = new Roles(3);
+        Roles roleSalesPerson = new Roles(4);
 
         userTest.addRole(roleAdmin);
         userTest.addRole(roleSalesPerson);
@@ -73,10 +72,10 @@ public class UserRepositoryTests {
 
     @Test
     public void testUpdateUserRoles(){
-        User userTestingUpdateRoles = userRepository.findById(2).get();
+        User userTestingUpdateRoles = userRepository.findById(1).get();
 
-        Roles roleAdmin = new Roles(9);
-        Roles roleShipper = new Roles(12);
+        Roles roleAdmin = new Roles(1);
+        Roles roleShipper = new Roles(2);
 
         userTestingUpdateRoles.getRoles().remove(roleAdmin);
         userTestingUpdateRoles.getRoles().add(roleShipper);
@@ -86,7 +85,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testDeleteUser(){
-        Integer userCode = 2;
+        Integer userCode = 3;
         userRepository.deleteById(userCode);
     }
 

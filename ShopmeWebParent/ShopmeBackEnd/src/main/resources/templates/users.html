@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.tymeleaft.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minumum-scale=1.0">
+    <title> Bem vindo ao Shopme Admin</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <script type="text/javascript" th:src = "@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src = "@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div>
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/logo.png}"/>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/usuarios}">Usuários</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/categorias}">Categórias</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/marcas}">Marcas</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/produtos}">Produtos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/artigos}">Artigos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/clientes}">Clientes</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/clientes}">Envios</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/menus}">Menus</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/relatoriosVenda}">Relatório de vendas</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <h1>Usuários</h1>
+</div>
+
+<div>
+    <p> Painel Administrativo - Copyright &copy; Shopme</p>
+</div>
+
+<div>
+    <table class="table table-bordered table-striped table-hover table-responsive-xl">
+        <thead class="thead-dark">
+            <tr>
+                <th>Código</th>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Email</th>
+                <th>Cargos</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user: ${listUsers}">
+                <td>[[${user.code}]]</td>
+                <td>[[${user.photos}]]</td>
+                <td>[[${user.firstName}]]</td>
+                <td>[[${user.lastName}]]</td>
+                <td>[[${user.email}]]</td>
+                <td>[[${user.roles}]]</td>
+                <td>[[${user.enabled}]]</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

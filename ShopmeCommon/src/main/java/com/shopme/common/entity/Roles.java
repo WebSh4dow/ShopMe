@@ -2,6 +2,7 @@ package com.shopme.common.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.management.relation.Role;
 import javax.persistence.*;
@@ -34,5 +35,10 @@ public class Roles {
         this.code = code;
     }
     public Roles(){}
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 
 }

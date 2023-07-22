@@ -1,4 +1,4 @@
-package com.shopme.user;
+package com.shopme.user.repository;
 
 import com.shopme.common.entity.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;
