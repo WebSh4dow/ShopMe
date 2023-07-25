@@ -70,7 +70,11 @@
 </div>
 
 <div>
-    <p> Painel Administrativo - Copyright &copy; Shopme</p>
+    <a th:href="@{/usuarios/novo}">Cadastrar Usuário</a>
+</div>
+
+<div th:if="${message != null}" class="alert alert-success text-center">
+    [[${message}]]
 </div>
 
 <div>
@@ -84,7 +88,6 @@
                 <th>Email</th>
                 <th>Cargos</th>
                 <th>Status</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
