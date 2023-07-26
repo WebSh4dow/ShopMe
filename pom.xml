@@ -10,7 +10,7 @@
     <modules>
         <module>ShopmeCommon</module>
         <module>ShopmeWebParent</module>
-        <module>ShopmeWebParent/ShopmeFrontEnd</module>
+        <module>ShopmeWebParent/ShopmeEcommerce</module>
     </modules>
 
     <properties>

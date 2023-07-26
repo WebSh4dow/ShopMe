@@ -3,10 +3,10 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/ShopmeCommon/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ShopmeCommon/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeAdmin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeAdmin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeEcommerce/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeEcommerce/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ShopmeWebParent/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ShopmeWebParent/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
