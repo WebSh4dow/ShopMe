@@ -29,7 +29,7 @@ public class RoleRepositoryTests {
     }
 
     @Test
-    public void testCreateRestRoles(){
+    public void testCreateRoles(){
         Roles roleSalesPerson = new Roles( "SalesPerson","manage product price," +
                 " custumers, shipping and sales report.");
 
