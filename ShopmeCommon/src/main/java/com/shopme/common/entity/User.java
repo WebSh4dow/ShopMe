@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "users")
 @EqualsAndHashCode
 @ToString
 public class User {

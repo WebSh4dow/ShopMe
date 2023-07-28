@@ -7,8 +7,11 @@
   <title> Cadastro de Usuários</title>
 
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
   <script type="text/javascript" th:src = "@{/webjars/jquery/jquery.min.js}"></script>
   <script type="text/javascript" th:src = "@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/javascript/common_form.js}"></script>
+
 </head>
 <body>
 <div>
@@ -70,7 +73,7 @@
 </div>
 
 <div>
-  <form th:action="@{/usuarios/salvar}"method="post"style="max-width:900px; margin: 0 auto" th:object="${user}">
+  <form onsubmit="return checkEmailUnique(this);" th:action="@{/usuarios/salvar}"method="post"style="max-width:900px; margin: 0 auto" th:object="${user}">
     <div class="border border-secondary rounded p-3">
 
       <div class="form-group-row">
@@ -128,14 +131,64 @@
 
     </div>
   </form>
+
+<div class="modal fade text-center" id="modalDialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalTitle">Atenção</h4>
+        <button type="button" id="btnClose" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <span id="modalBody"></span>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="btnCloseModal"  data-dismiss="modal">Sair</button>
+      </div>
+
+    </div>
+
+  </div>
 </div>
-<script type="javascript">
-  $(document).ready(function(){
-    $("#buttonCancel).on("click",function(){
+
+</div>
+<script type="text/javascript">
+ $(document).ready(function() {
+  $("#buttonCancel").on("click",function() {
         window.location = "[[@{/usuarios}]]";
     });
   });
 </script>
+
+<script type="text/javascript">
+  function checkEmailUnique(form) {
+			url = "[[@{/rest/check-email}]]";
+			userEmail = $("#email").val();
+			userId = $("#id").val();
+			csrfValue = $("input[name='_csrf']").val();
+
+			params = {id: userId, email: userEmail, _csrf: csrfValue};
+
+			$.post(url, params, function(response) {
+				if (response == "OK") {
+					form.submit();
+				} else if (response == "Duplicated") {
+					showWarningModal("Este email ja está cadastrado no sistema: " + userEmail);
+				} else {
+					showErrorModal("Erro ao fazer a requisição com o servidor");
+				}
+			}).fail(function() {
+				showErrorModal("Não foi possivel fazer a conexão com o servidor, contate o administrador do sistema");
+			});
+
+			return false;
+		}
+</script>
+
+
 
 </body>
 </html>
