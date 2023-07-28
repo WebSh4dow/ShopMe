@@ -7,102 +7,93 @@
     <title> Bem vindo ao Shopme Admin</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/css/uikit.min.css" />
+
     <script type="text/javascript" th:src = "@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src = "@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/js/uikit-icons.min.js"></script>
 </head>
 <body>
 <div>
-    <div>
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-            <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/logo.png}"/>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="topNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/usuarios}">Usuários</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/categorias}">Categórias</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/marcas}">Marcas</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/produtos}">Produtos</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/artigos}">Artigos</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/clientes}">Clientes</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/clientes}">Envios</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/menus}">Menus</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/relatoriosVenda}">Relatório de vendas</a>
-                    </li>
-                </ul>
+    <nav class="uk-navbar-container">
+        <div class="uk-container">
+            <div uk-navbar>
+                <div class="uk-navbar-center">
+                    <div class="uk-navbar-center-left">
+                        <ul class="uk-navbar-nav">
+                            <li class="uk-active"><a th:href="@{/usuarios}">Usuários</a></li>
+                            <li class="uk-active"><a th:href="@{/categorias}">Categórias</a></li>
+                            <li class="uk-active"><a th:href="@{/marcas}">Marcas</a></li>
+                            <li class="uk-active"><a th:href="@{/produtos}">Produtos</a></li>
+                            <li class="uk-active"><a th:href="@{/artigos}">Artigos</a></li>
+                        </ul>
+                    </div>
+                    <a class="uk-navbar-item uk-logo" href="#">
+                        <img width="110px" th:src="@{/images/logo.png}">
+                    </a>
+                    <div class="uk-navbar-center-right">
+                        <ul class="uk-navbar-nav">
+                            <li class="uk-active"><a th:href="@{/clientes}">Clientes</a></li>
+                            <li class="uk-active"><a th:href="@{/envios}">Envios</a></li>
+                            <li class="uk-active"><a th:href="@{/menus}">Menus</a></li>
+                            <li class="uk-active"><a th:href="@{/vendas}">Relatório de vendas</a></li>
+                            <li class="uk-active"><a th:href="@{/produtos}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
 </div>
 
 <div class="container-fluid">
     <h1>Usuários</h1>
 </div>
 
-<div>
-    <a th:href="@{/usuarios/novo}">Cadastrar Usuário</a>
-</div>
+<button id="buttonCadastrar" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Cadastrar</button>
 
 <div th:if="${message != null}" class="alert alert-success text-center">
     [[${message}]]
 </div>
 
-<div>
-    <table class="table table-bordered table-striped table-hover table-responsive-xl">
-        <thead class="thead-dark">
-            <tr>
-                <th>Código</th>
-                <th>Foto</th>
-                <th>Nome</th>
-                <th>Sobrenome</th>
-                <th>Email</th>
-                <th>Cargos</th>
-                <th>Status</th>
-            </tr>
+<div class="uk-overflow-auto">
+    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+        <thead>
+        <tr>
+
+            <th class="uk-width-small">Código</th>
+            <th class="uk-width-small">Foto</th>
+            <th class="uk-width-small">Nome</th>
+            <th class="uk-width-small">SobreNome</th>
+            <th class="uk-width-small">Email</th>
+            <th class="uk-width-small">Cargos</th>
+            <th class="uk-width-small">Status</th>
+            <th class="uk-width-small"></th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="user: ${listUsers}">
-                <td>[[${user.code}]]</td>
-                <td>[[${user.photos}]]</td>
-                <td>[[${user.firstName}]]</td>
-                <td>[[${user.lastName}]]</td>
-                <td>[[${user.email}]]</td>
-                <td>[[${user.roles}]]</td>
-                <td>[[${user.enabled}]]</td>
-            </tr>
+        <tr th:each="user: ${listUsers}">
+            <td>[[${user.code}]]</td>
+            <td>[[${user.photos}]]</td>
+            <td>[[${user.firstName}]]</td>
+            <td>[[${user.lastName}]]</td>
+            <td>[[${user.email}]]</td>
+            <td>[[${user.roles}]]</td>
+            <td>[[${user.enabled}]]</td>
+        </tr>
         </tbody>
     </table>
 </div>
 
 </body>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+  $("#buttonCadastrar").on("click",function() {
+        window.location = "[[@{/usuarios/novo}]]";
+    });
+  });
+</script>
+
 </html>

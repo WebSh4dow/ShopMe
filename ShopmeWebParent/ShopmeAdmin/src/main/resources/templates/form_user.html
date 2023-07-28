@@ -7,129 +7,114 @@
   <title> Cadastro de Usuários</title>
 
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/css/uikit.min.css" />
 
   <script type="text/javascript" th:src = "@{/webjars/jquery/jquery.min.js}"></script>
   <script type="text/javascript" th:src = "@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/js/uikit-icons.min.js"></script>
   <script th:src="@{/javascript/common_form.js}"></script>
 
 </head>
 <body>
 <div>
-  <div>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-      <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/images/logo.png}"/>
-      </a>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="topNavbar">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/usuarios}">Usuários</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/categorias}">Categórias</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/marcas}">Marcas</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/produtos}">Produtos</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/artigos}">Artigos</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/clientes}">Clientes</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/clientes}">Envios</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/menus}">Menus</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/relatoriosVenda}">Relatório de vendas</a>
-          </li>
-        </ul>
+  <nav class="uk-navbar-container">
+    <div class="uk-container">
+      <div uk-navbar>
+        <div class="uk-navbar-center">
+          <div class="uk-navbar-center-left">
+            <ul class="uk-navbar-nav">
+              <li class="uk-active"><a th:href="@{/usuarios}">Usuários</a></li>
+              <li class="uk-active"><a th:href="@{/categorias}">Categórias</a></li>
+              <li class="uk-active"><a th:href="@{/marcas}">Marcas</a></li>
+              <li class="uk-active"><a th:href="@{/produtos}">Produtos</a></li>
+              <li class="uk-active"><a th:href="@{/artigos}">Artigos</a></li>
+            </ul>
+          </div>
+          <a class="uk-navbar-item uk-logo" href="#">
+            <img width="110px" th:src="@{/images/logo.png}">
+          </a>
+          <div class="uk-navbar-center-right">
+            <ul class="uk-navbar-nav">
+              <li class="uk-active"><a th:href="@{/clientes}">Clientes</a></li>
+              <li class="uk-active"><a th:href="@{/envios}">Envios</a></li>
+              <li class="uk-active"><a th:href="@{/menus}">Menus</a></li>
+              <li class="uk-active"><a th:href="@{/vendas}">Relatório de vendas</a></li>
+              <li class="uk-active"><a th:href="@{/produtos}">Logout</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </nav>
+    </div>
+  </nav>
+</div>
+
+<div class="uk-section uk-section-primary">
+  <div class="uk-container">
+    <h3>Cadastro de Usuários</h3>
+    <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+      <div>
+        <p>Rotina responsável para cadastro de usuários, apartir dessa rotina será possivel realizar as demais operações no sistema</p>
+      </div>
+      <div>
+        <p>Utilize também para edição de usuários do sistema, apartir dessa rotina será possivel realizar as demais operações no sistema</p>
+      </div>
+      <div>
+        <p>Preencha os campos solicitados abaixo para prosseguir também no cadastro de usuários, não se esqueça de selecionar os tipos de acessos</p>
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="container-fluid">
-  <h1> Cadastro|Usuários</h1>
-</div>
-
 <div>
-  <form onsubmit="return checkEmailUnique(this);" th:action="@{/usuarios/salvar}"method="post"style="max-width:900px; margin: 0 auto" th:object="${user}">
-    <div class="border border-secondary rounded p-3">
+<br>
+  <form class="uk-grid-small" uk-grid onsubmit="return checkEmailUnique(this);" th:action="@{/usuarios/salvar}"method="post"style="max-width:900px; margin: 0 auto" th:object="${user}">
 
-      <div class="form-group-row">
-        <label class="col-sm-4 col-form-label">E-mail</label>
-        <div class="col-sm-8">
-        <input type="email" class="form-control" th:field="*{email}" required minlength="8"  maxlength="128" />
-        </div>
-      </div>
-
-      <div class="form-group-row">
-        <label class="col-sm-4 col-form-label">Nome</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{firstName}" required minlength="4"  maxlength="45" />
-        </div>
-      </div>
-
-      <div class="form-group-row">
-        <label class="col-sm-4 col-form-label">SobreNome</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{lastName}" required minlength="4"  maxlength="45" />
-        </div>
-      </div>
-
-      <div class="form-group-row">
-        <label class="col-sm-4 col-form-label">Senha</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" th:field="*{password}" required minlength="8"  maxlength="20" />
-        </div>
-      </div>
-
-      <div class="form-group-row">
-        <label class="col-sm-4 col-form-label">Status</label>
-        <div class="col-sm-8">
-            <input type="checkbox" th:field="*{enabled}" />
-        </div>
-      </div>
-
-      <div class="form-group-row">
-        <label class="col-sm-4 col-form-label">Tipos de Acesso</label>
-        <div class="col-sm-8">
-         <th:block th:each="role:${listRoles}">
-           <input type="checkbox" th:field="*{roles}"
-           th:text="${role.name}" th:Value="${role.code}"
-           />
-           - <small>[[${role.description}]]</small>
-           <br/>
-         </th:block>
-        </div>
-      </div>
-
-      <div class="text-center">
-        <input type="submit" value="Salvar" class="btn btn-primary m-3"/>
-        <input type="button" value="Cancelar" class="btn btn-secundary" id="buttonCancel"/>
-      </div>
-
+    <div class="uk-width-1-1">
+      <div class="uk-form-label">Email</div>
+      <input  th:field="*{email}" required minlength="8"  maxlength="128" class="uk-input" type="text" aria-label="Clickable icon">
     </div>
+
+    <div class="uk-width-1-2@s">
+      <div class="uk-form-label">Primeiro Nome</div>
+      <input type="text" class="form-control" th:field="*{firstName}" required minlength="4"  maxlength="45" />
+    </div>
+
+    <div class="uk-width-1-4@s">
+      <div class="uk-form-label">Segundo nome</div>
+      <input type="text" class="form-control" th:field="*{lastName}" required minlength="4"  maxlength="45" />
+    </div>
+
+    <div class="uk-width-1-4@s">
+      <div class="uk-form-label">Senha</div>
+      <input type="password" class="form-control" th:field="*{password}" required minlength="8"  maxlength="20" />
+    </div>
+
+    <div class="uk-margin">
+      <div class="uk-form-label">Acessos</div>
+      <div class="uk-form-controls uk-form-controls-text">
+        <th:block th:each="role:${listRoles}">
+          <label>
+            <input type="checkbox" th:field="*{roles}"
+                   th:text="${role.name}" th:Value="${role.code}"
+            />
+          </label>
+          - <small>[[${role.description}]]</small>
+          <br/>
+        </th:block>
+      </div>
+    </div>
+
+
+
+    <div class="uk-width-1-2@s">
+      <div class="uk-form-label">Ativo</div>
+      <input type="checkbox" th:field="*{enabled}" />
+    </div>
+
+    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" type="submit">Salvar</button>
+    <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"  id="buttonCancel">Cancelar</button>
+
+
   </form>
 
 <div class="modal fade text-center" id="modalDialog">
