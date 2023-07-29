@@ -29,7 +29,7 @@
                             <li class="uk-active"><a th:href="@{/artigos}">Artigos</a></li>
                         </ul>
                     </div>
-                    <a class="uk-navbar-item uk-logo" href="#">
+                    <a class="uk-navbar-item uk-logo" th:href="@{/}">
                         <img width="110px" th:src="@{/images/logo.png}">
                     </a>
                     <div class="uk-navbar-center-right">
@@ -58,7 +58,7 @@
 </div>
 
 <div class="uk-overflow-auto">
-    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider uk-table-justify">
         <thead>
         <tr>
 
@@ -74,13 +74,23 @@
         </thead>
         <tbody>
         <tr th:each="user: ${listUsers}">
+
             <td>[[${user.code}]]</td>
-            <td>[[${user.photos}]]</td>
+            <td><span uk-icon="image"></span></td>
             <td>[[${user.firstName}]]</td>
             <td>[[${user.lastName}]]</td>
             <td>[[${user.email}]]</td>
             <td>[[${user.roles}]]</td>
-            <td>[[${user.enabled}]]</td>
+            <td>
+                <a th:if="${user.enabled}" uk-icon="icon:check"></a>
+                <span th:unless="${user.enabled}" uk-icon="icon:ban"></span>
+            </td>
+
+            <td>
+                <a uk-icon="icon: trash"></a>
+                &nbsp;
+                <a uk-icon="icon:pencil"></a>
+            </td>
         </tr>
         </tbody>
     </table>
