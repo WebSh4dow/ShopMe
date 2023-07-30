@@ -1,4 +1,4 @@
-package com.shopme.application;
+package com.shopme.application.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

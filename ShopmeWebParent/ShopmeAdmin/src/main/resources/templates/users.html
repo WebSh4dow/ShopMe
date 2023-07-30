@@ -80,16 +80,19 @@
             <td>[[${user.firstName}]]</td>
             <td>[[${user.lastName}]]</td>
             <td>[[${user.email}]]</td>
-            <td>[[${user.roles}]]</td>
             <td>
-                <a th:if="${user.enabled}" uk-icon="icon:check"></a>
-                <span th:unless="${user.enabled}" uk-icon="icon:ban"></span>
+                <span style=" margin-right: 5px;" th:each="cargo : ${user.roles}" class="uk-label uk-label" th:text="${cargo}"></span>
+            </td>
+
+            <td>
+                <span th:if="${user.enabled}" class="uk-label uk-label-success">Ativo</span>
+                <span th:unless="${user.enabled}" class="uk-label uk-label-danger">Inativo</span>
             </td>
 
             <td>
                 <a uk-icon="icon: trash"></a>
                 &nbsp;
-                <a uk-icon="icon:pencil"></a>
+                <a uk-icon="icon:pencil" th:href="@{'/usuarios/editar/' + ${user.code}}" title="edição de usuário"></a>
             </td>
         </tr>
         </tbody>
