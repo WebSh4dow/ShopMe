@@ -22,7 +22,7 @@ public class RoleRepositoryTests {
 
     @Test
     public void testCreateFirstRole(){
-        Roles role = new Roles("Admin","administration system");
+        Roles role = new Roles("Operator","operator system role, manage system operations.");
 
         Roles saveRole = roleRepository.save(role);
         assertThat(saveRole.getCode()).isGreaterThan(0);
