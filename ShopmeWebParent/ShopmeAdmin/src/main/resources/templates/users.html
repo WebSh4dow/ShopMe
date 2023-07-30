@@ -7,8 +7,8 @@
     <title> Bem vindo ao Shopme Admin</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/css/uikit.min.css" />
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/css/uikit.min.css" />
+    <link rel="stylesheet" type="text/css"  href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
     <script type="text/javascript" th:src = "@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src = "@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/js/uikit.min.js"></script>
@@ -47,8 +47,26 @@
     </nav>
 </div>
 
+
+
 <div class="container-fluid">
     <h1>Usuários</h1>
+</div>
+
+<div id="confirmModal" uk-modal>
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h4 class="uk-modal-title">Confirmar Remoção de Usuário</h4>
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+        </div>
+        <div class="uk-modal-body">
+            <span id="confirmText"></span>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <a id="yesButton" class="uk-button uk-button-primary" href="#">Sim</a>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Não</button>
+        </div>
+    </div>
 </div>
 
 <button id="buttonCadastrar" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Cadastrar</button>
@@ -90,7 +108,8 @@
             </td>
 
             <td>
-                <a uk-icon="icon: trash"th:href="@{'/usuarios/remover/' + ${user.code}}" title="remover usuário"></a>
+                <a class="link-delete" uk-icon="icon: trash" title="remover usuário"  th:userName="${user.firstName}"
+                   th:href="@{'/usuarios/remover/' + ${user.code}}"></a>
                 &nbsp;
                 <a uk-icon="icon:pencil" th:href="@{'/usuarios/editar/' + ${user.code}}" title="edição de usuário"></a>
             </td>
@@ -108,5 +127,20 @@
     });
   });
 </script>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+      $(".link-delete").on("click", function(e) {
+        e.preventDefault();
+        var link = $(this).attr("href");
+        var userName = $(this).attr("userName");
+
+        $("#confirmText").text("Deseja remover o Usuário: " + userName);
+        $("#yesButton").attr("href", link);
+
+        UIkit.modal("#confirmModal").show();
+      });
+    });
+  </script>
 
 </html>
