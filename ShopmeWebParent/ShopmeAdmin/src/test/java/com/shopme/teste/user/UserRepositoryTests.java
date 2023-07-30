@@ -96,4 +96,12 @@ public class UserRepositoryTests {
          assertThat(usertesting).isNotNull();
     }
 
+    @Test
+    public void testCountByCode(){
+        Integer code = 100;
+        Long countByCode = userRepository.countBycode(code);
+        assertThat(countByCode).isGreaterThan(0);
+
+    }
+
 }

@@ -1,14 +1,16 @@
-function showModalDialog(title,message){
-    $("#modalitle").text(title);
-    $("#modalBody").text(message);
-    $("#modalDialog").modal();
+function showModalDialog(title, message) {
+
+    document.getElementById("modalTitle").textContent = title;
+    document.getElementById("modalBody").textContent = message;
+
+    const modal = UIkit.modal("#modalDialog");
+    modal.show();
 }
 
-function showErrorModal(message){
-    showModalDialog("ERRO",message);
+function showErrorModal(message) {
+    showModalDialog("Erro", message);
 }
 
-function showWarningModal(message){
-    showModalDialog("ATENÇÃO",message);
+function showWarningModal(message) {
+    showModalDialog("Atenção", message);
 }
-

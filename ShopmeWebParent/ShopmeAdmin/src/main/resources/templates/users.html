@@ -90,7 +90,7 @@
             </td>
 
             <td>
-                <a uk-icon="icon: trash"></a>
+                <a uk-icon="icon: trash"th:href="@{'/usuarios/remover/' + ${user.code}}" title="remover usuário"></a>
                 &nbsp;
                 <a uk-icon="icon:pencil" th:href="@{'/usuarios/editar/' + ${user.code}}" title="edição de usuário"></a>
             </td>

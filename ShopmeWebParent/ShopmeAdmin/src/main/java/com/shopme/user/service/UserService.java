@@ -78,4 +78,12 @@ public class UserService {
             throw new UserNotFoundException("Usuário não foi localizado no banco de dados" + code);
         }
     }
+    public void deleteByCode(Integer code) throws UserNotFoundException {
+        Long countByCode = userRepository.countBycode(code);
+        if (countByCode == null || countByCode == 0){
+            throw new UserNotFoundException("");
+        }
+        userRepository.deleteById(code);
+    }
+
 }

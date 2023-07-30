@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -53,6 +54,18 @@ public class UserController {
             model.addAttribute("user",user);
             model.addAttribute("pageTitle","Cadastro de Usuários:"+ " " + user.getFirstName() + " " + user.getLastName());
             return "form_user";
+        } catch (UserNotFoundException e) {
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("/usuarios/remover/{code}")
+    public String removeUser(@PathVariable(name = "code")Integer code,Model model,RedirectAttributes redirectAttributes){
+        try {
+            userService.deleteByCode(code);
+            redirectAttributes.addFlashAttribute("message","O usuário com o seguinte codigo:" +
+                   " " + code + " " + "foi removido com sucesso");
         } catch (UserNotFoundException e) {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
