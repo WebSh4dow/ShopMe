@@ -46,7 +46,9 @@ public class UserController {
     }
 
     @GetMapping("/usuarios/editar/{code}")
-    public String editUser(@PathVariable(name = "code") Integer code,RedirectAttributes redirectAttributes,Model model){
+    public String editUser(@PathVariable(name = "code") Integer code,
+                           RedirectAttributes redirectAttributes,
+                           Model model){
         try {
             User user = userService.getUserByCode(code);
             List<Roles> listRoles = userService.listRoles();
@@ -61,7 +63,9 @@ public class UserController {
     }
 
     @GetMapping("/usuarios/remover/{code}")
-    public String removeUser(@PathVariable(name = "code")Integer code,Model model,RedirectAttributes redirectAttributes){
+    public String removeUser(@PathVariable(name = "code")Integer code,
+                             Model model,
+                             RedirectAttributes redirectAttributes){
         try {
             userService.deleteByCode(code);
             redirectAttributes.addFlashAttribute("message","O usuário com o seguinte codigo:" +
@@ -70,6 +74,18 @@ public class UserController {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
         return "redirect:/usuarios";
+    }
+
+    @GetMapping("usuarios/{code}/update/{status}")
+    public String updateUserStatusEnabledStatus(@PathVariable(name = "code") Integer code,
+                                                @PathVariable(name = "status")boolean active,
+                                                RedirectAttributes redirectAttributes){
+    userService.updateStatusUserEnabled(code,active);
+    String status = active ? "ativo" : "inativo";
+    String message = "O usuário com codigo:" + code + " "+ "teve seu status modificado para " + status;
+    redirectAttributes.addFlashAttribute("message",message);
+    return "redirect:/usuarios";
+
     }
 
 }
