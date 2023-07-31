@@ -101,7 +101,18 @@ public class UserRepositoryTests {
         Integer code = 100;
         Long countByCode = userRepository.countBycode(code);
         assertThat(countByCode).isGreaterThan(0);
+    }
 
+    @Test
+    public void testDisabledUser(){
+        Integer code = 13;
+        userRepository.updateEnabledStatus(code,false);
+    }
+
+    @Test
+    public void testEnabledUser(){
+        Integer code = 13;
+        userRepository.updateEnabledStatus(code,true);
     }
 
 }

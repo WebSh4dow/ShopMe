@@ -85,5 +85,8 @@ public class UserService {
         }
         userRepository.deleteById(code);
     }
+    public void updateStatusUserEnabled(Integer code,boolean enabled){
+        userRepository.updateEnabledStatus(code,enabled);
+    }
 
 }
