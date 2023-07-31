@@ -20,8 +20,24 @@
         <div class="uk-container">
             <div uk-navbar>
                 <div class="uk-navbar-center">
+                    <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon href="#"></a>
+
+                    <div class="uk-navbar-dropdown uk-hidden@m" uk-dropdown="mode: click; pos: bottom-justify;">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li class="uk-active"><a th:href="@{/usuarios}">Usuários</a></li>
+                            <li class="uk-active"><a th:href="@{/categorias}">Categorias</a></li>
+                            <li class="uk-active"><a th:href="@{/marcas}">Marcas</a></li>
+                            <li class="uk-active"><a th:href="@{/produtos}">Produtos</a></li>
+                            <li class="uk-active"><a th:href="@{/artigos}">Artigos</a></li>
+                            <li class="uk-active"><a th:href="@{/clientes}">Clientes</a></li>
+                            <li class="uk-active"><a th:href="@{/envios}">Envios</a></li>
+                            <li class="uk-active"><a th:href="@{/menus}">Menus</a></li>
+                            <li class="uk-active"><a th:href="@{/vendas}">Relatório de vendas</a></li>
+                            <li class="uk-active"><a th:href="@{/produtos}">Logout</a></li>
+                        </ul>
+                    </div>
                     <div class="uk-navbar-center-left">
-                        <ul class="uk-navbar-nav">
+                        <ul class="uk-navbar-nav uk-visible@m" >
                             <li class="uk-active"><a th:href="@{/usuarios}">Usuários</a></li>
                             <li class="uk-active"><a th:href="@{/categorias}">Categórias</a></li>
                             <li class="uk-active"><a th:href="@{/marcas}">Marcas</a></li>
@@ -29,11 +45,11 @@
                             <li class="uk-active"><a th:href="@{/artigos}">Artigos</a></li>
                         </ul>
                     </div>
-                    <a class="uk-navbar-item uk-logo" th:href="@{/}">
+                    <a class="uk-navbar-item uk-logo"  th:href="@{/}">
                         <img width="110px" th:src="@{/images/logo.png}">
                     </a>
                     <div class="uk-navbar-center-right">
-                        <ul class="uk-navbar-nav">
+                        <ul class="uk-navbar-nav uk-visible@m">
                             <li class="uk-active"><a th:href="@{/clientes}">Clientes</a></li>
                             <li class="uk-active"><a th:href="@{/envios}">Envios</a></li>
                             <li class="uk-active"><a th:href="@{/menus}">Menus</a></li>
@@ -46,7 +62,6 @@
         </div>
     </nav>
 </div>
-
 
 
 <div class="container-fluid">
@@ -79,7 +94,6 @@
     <table class="uk-table uk-table-hover uk-table-middle uk-table-divider uk-table-justify">
         <thead>
         <tr>
-
             <th class="uk-width-small">Código</th>
             <th class="uk-width-small">Foto</th>
             <th class="uk-width-small">Nome</th>
@@ -92,7 +106,6 @@
         </thead>
         <tbody>
         <tr th:each="user: ${listUsers}">
-
             <td>[[${user.code}]]</td>
             <td><span uk-icon="image"></span></td>
             <td>[[${user.firstName}]]</td>
@@ -103,8 +116,8 @@
             </td>
 
             <td>
-                <span th:if="${user.enabled}" class="uk-label uk-label-success">Ativo</span>
-                <span th:unless="${user.enabled}" class="uk-label uk-label-danger">Inativo</span>
+                <a style="text-decoration: none;" th:if="${user.enabled}" th:href="@{'/usuarios/' + ${user.code} + '/update/false'}" class="uk-label uk-label-success">Ativo</a>
+                <a style="text-decoration: none;" th:unless="${user.enabled}"th:href="@{'/usuarios/' + ${user.code} + '/update/true'}" class="uk-label uk-label-danger">Inativo</a>
             </td>
 
             <td>
@@ -117,6 +130,10 @@
         </tbody>
     </table>
 </div>
+
+<footer style="position: absolute; bottom: 0; width: 100%; background-color: #f5f5f5; padding: 15px; text-align: center;">
+    <p> Painel Administrativo - Direitos Autorais &copy; BitCommerce</p>
+</footer>
 
 </body>
 
