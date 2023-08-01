@@ -8,10 +8,8 @@ import com.shopme.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 @Component
 public class UserService {
@@ -23,6 +21,8 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private static final String MESSAGE_USER_NOT_FOUND = "Usuário não foi localizado no banco de dados";
 
     public List<User> listAll(){
         return userRepository.findAll();
@@ -75,13 +75,13 @@ public class UserService {
         try {
             return userRepository.findById(code).get();
         } catch (NoSuchElementException exception){
-            throw new UserNotFoundException("Usuário não foi localizado no banco de dados" + code);
+            throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND + code);
         }
     }
     public void deleteByCode(Integer code) throws UserNotFoundException {
         Long countByCode = userRepository.countBycode(code);
         if (countByCode == null || countByCode == 0){
-            throw new UserNotFoundException("");
+            throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
         }
         userRepository.deleteById(code);
     }
