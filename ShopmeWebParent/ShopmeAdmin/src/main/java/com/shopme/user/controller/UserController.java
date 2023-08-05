@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
     private final static String URI_REDIRECT_USER = "redirect:/usuarios";
     private final static String VIEW_USER_REDIRECT = "users";
-    private final static String FORM_USER_REDIRECT = "form_user";
+    private final static String VIEW_USER_FORM_REDIRECT = "form_user";
 
     @GetMapping("/usuarios")
     public String listAll(Model model){
@@ -36,7 +36,7 @@ public class UserController {
         model.addAttribute("user",user);
         model.addAttribute("listRoles",listRoles);
         model.addAttribute("pageTitle","Cadastro de Usuários");
-        return FORM_USER_REDIRECT;
+        return VIEW_USER_FORM_REDIRECT;
     }
 
     @PostMapping("/usuarios/salvar")
@@ -57,7 +57,8 @@ public class UserController {
             model.addAttribute("user",user);
             model.addAttribute("pageTitle",
                     "Cadastro de Usuários:"+ " " + user.getFirstName() + " " + user.getLastName());
-            return "form_user";
+            return VIEW_USER_FORM_REDIRECT;
+
         } catch (UserNotFoundException e) {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
