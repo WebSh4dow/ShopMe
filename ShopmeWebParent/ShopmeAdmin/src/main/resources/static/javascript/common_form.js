@@ -8,7 +8,7 @@ function showModalDialog(title, message) {
 }
 
 function showErrorModal(message) {
-    showModalDialog("Erro", message);
+     showModalDialog("Erro", message);
 }
 
 function showWarningModal(message) {
