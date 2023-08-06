@@ -5,9 +5,13 @@ import com.shopme.common.entity.Roles;
 import com.shopme.common.entity.User;
 import com.shopme.user.repository.RoleRepository;
 import com.shopme.user.repository.UserRepository;
+import com.shopme.user.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -32,7 +36,7 @@ public class UserService {
      return roleRepository.findAll();
     }
 
-    public void salvar(User user) {
+    public User salvar(User user) {
         boolean isUpdatingUser = (user.getCode() != null);
 
         if (isUpdatingUser){
@@ -46,7 +50,7 @@ public class UserService {
         }else{
             encodePassword(user);
         }
-        userRepository.save(user);
+        return userRepository.save(user);
     }
     private void encodePassword(User user){
         String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -89,4 +93,20 @@ public class UserService {
         userRepository.updateEnabledStatus(code,enabled);
     }
 
+    public void checkFileImageUpload(MultipartFile multipartFile,User user) throws IOException {
+        if (!multipartFile.isEmpty()){
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+            user.setPhotos(fileName);
+            User savedUser = salvar(user);
+
+            String uploadDir = "user-photos/" + savedUser.getCode();
+            FileUploadUtil.saveFile(uploadDir,fileName,multipartFile);
+        } else {
+            if (user.getPhotos().isEmpty()) {
+                user.setPhotos(null);
+                salvar(user);
+            }
+        }
+    }
 }

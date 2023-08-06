@@ -41,6 +41,14 @@ public class User {
 
     private boolean enabled;
 
+    @Transient
+    public String getPhotosImagePath(){
+        if (code == null || photos == null){
+            return "/images/logo.png";
+        }
+        return "/user-photos/" + this.code + "/" + this.photos;
+    }
+
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;
