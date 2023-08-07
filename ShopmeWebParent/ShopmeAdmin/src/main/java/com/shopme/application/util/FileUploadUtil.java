@@ -1,4 +1,4 @@
-package com.shopme.user.util;
+package com.shopme.application.util;
 
 import org.springframework.web.multipart.MultipartFile;
 

@@ -5,7 +5,7 @@ import com.shopme.common.entity.Roles;
 import com.shopme.common.entity.User;
 import com.shopme.user.repository.RoleRepository;
 import com.shopme.user.repository.UserRepository;
-import com.shopme.user.util.FileUploadUtil;
+import com.shopme.application.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
