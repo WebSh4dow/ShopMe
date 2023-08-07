@@ -103,10 +103,8 @@ public class UserService {
             String uploadDir = "user-photos/" + savedUser.getCode();
             FileUploadUtil.saveFile(uploadDir,fileName,multipartFile);
         } else {
-            if (user.getPhotos().isEmpty()) {
-                user.setPhotos(null);
-                salvar(user);
-            }
+            if (user.getPhotos().isEmpty()) user.setPhotos(null);
+            salvar(user);
         }
     }
 }

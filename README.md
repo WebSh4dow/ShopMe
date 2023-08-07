@@ -1,11 +1,11 @@
 # Projeto E-commerce - shopme
 
-![E-commerce]()
+![E-commerce](bemvindo.png)
 
 ## Descrição do Projeto
 
 Este projeto é um E-commerce desenvolvido com o objetivo de criar uma plataforma de comércio eletrônico onde usuários podem navegar por produtos, adicioná-los ao carrinho e realizar compras online.
-
+![E-commerce](bemvindo.png)
 ## Tecnologias Utilizadas
 
 - Spring Framework: Utilizado para criar uma aplicação web robusta, segura e escalável.
