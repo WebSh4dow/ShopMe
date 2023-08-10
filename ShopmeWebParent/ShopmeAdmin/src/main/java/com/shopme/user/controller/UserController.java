@@ -5,6 +5,7 @@ import com.shopme.common.entity.Roles;
 import com.shopme.common.entity.User;
 import com.shopme.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,20 +18,46 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
 
+import static com.shopme.user.service.UserService.*;
+
 @Controller
 public class UserController {
-    @Autowired
-    private UserService userService;
     private final static String URI_REDIRECT_USER = "redirect:/usuarios";
     private final static String VIEW_USER_REDIRECT = "users";
     private final static String VIEW_USER_FORM_REDIRECT = "form_user";
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/usuarios")
     public String listAll(Model model){
-        List<User> listUsers = userService.listAll();
+        return listByPage(FIRST_PAGE,model);
+    }
+
+    @GetMapping("/usuarios/pagina/{pageNum}")
+    public String listByPage(@PathVariable(name= "pageNum") int pageNum, Model model){
+        Page<User> listUserPages = userService.listByPage(pageNum);
+        List<User> listUsers = listUserPages.getContent();
+
+        long initialCount = (FIRST_PAGE) * USERS_PER_PAGE + FIRST_PAGE;
+        long finalCount = initialCount + USERS_PER_PAGE - FIRST_PAGE;
+
+        if (finalCount > listUserPages.getTotalElements()){
+            finalCount = listUserPages.getTotalElements();
+        }
+
+        model.addAttribute("currentPage",pageNum);
+        model.addAttribute("initialCount",initialCount);
+
+        model.addAttribute("finalCount",finalCount);
+        model.addAttribute("totalPages",listUserPages.getTotalPages());
+
+        model.addAttribute("totalItems",listUserPages.getTotalElements());
         model.addAttribute("listUsers",listUsers);
+
         return VIEW_USER_REDIRECT;
     }
+
     @GetMapping("/usuarios/novo")
     public String cadastrarUsuarios(Model model){
         List<Roles> listRoles = userService.listRoles();
@@ -80,7 +107,6 @@ public class UserController {
                    " " + code + " " + "foi removido com sucesso");
         } catch (UserNotFoundException e) {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
-
         }
         return URI_REDIRECT_USER;
     }

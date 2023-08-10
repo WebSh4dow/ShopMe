@@ -7,6 +7,9 @@ import com.shopme.user.repository.RoleRepository;
 import com.shopme.user.repository.UserRepository;
 import com.shopme.application.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,6 +20,10 @@ import java.util.NoSuchElementException;
 
 @Component
 public class UserService {
+
+    public static final int USERS_PER_PAGE = 4;
+
+    public static final int FIRST_PAGE = 1;
     @Autowired
     private UserRepository userRepository;
 
@@ -82,6 +89,12 @@ public class UserService {
             throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND + code);
         }
     }
+
+    public Page<User> listByPage(int pageNumber){
+        int actuaPage = pageNumber - FIRST_PAGE;
+        Pageable pageable = PageRequest.of(actuaPage ,USERS_PER_PAGE);
+        return userRepository.findAll(pageable);
+    }
     public void deleteByCode(Integer code) throws UserNotFoundException {
         Long countByCode = userRepository.countBycode(code);
         if (countByCode == null || countByCode == 0){
@@ -93,17 +106,16 @@ public class UserService {
         userRepository.updateEnabledStatus(code,enabled);
     }
 
-    public void checkFileImageUpload(MultipartFile multipartFile,User user) throws IOException {
-        if (!multipartFile.isEmpty()){
+    public void checkFileImageUpload(MultipartFile multipartFile, User user) throws IOException {
+        if (!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
             user.setPhotos(fileName);
             User savedUser = salvar(user);
 
             String uploadDir = "user-photos/" + savedUser.getCode();
-            FileUploadUtil.saveFile(uploadDir,fileName,multipartFile);
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         } else {
-            if (user.getPhotos().isEmpty()) user.setPhotos(null);
             salvar(user);
         }
     }
