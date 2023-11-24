@@ -1,4 +1,4 @@
-# Projeto E-commerce - shopme
+# Projeto E-commerce 
 
 ![E-commerce](bemvindo.png)
 
