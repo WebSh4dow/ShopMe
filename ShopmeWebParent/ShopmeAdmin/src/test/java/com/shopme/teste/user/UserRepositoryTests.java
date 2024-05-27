@@ -50,9 +50,24 @@ public class UserRepositoryTests {
     }
 
     @Test
+    public void testSearchUsers() {
+        String keword = "Beemo";
+
+        int pageNumber = 0;
+        int pageSize = 4;
+
+        Pageable pageable = PageRequest.of(pageNumber,pageSize);
+        Page<User> page = userRepository.findAll(keword,pageable);
+
+        List <User> listUsers = page.getContent();
+        listUsers.forEach(System.out::println);
+        assertThat(listUsers.size()).isGreaterThan(0);
+    }
+
+    @Test
     public void testUserList(){
         List<User> listUsersTest = userRepository.findAll();
-        listUsersTest.forEach(user -> System.out.println(user));
+        listUsersTest.forEach(System.out::println);
     }
 
     @Test
@@ -127,7 +142,7 @@ public class UserRepositoryTests {
         Page<User> page = userRepository.findAll(pageable);
 
         List <User> listUsers = page.getContent();
-        listUsers.forEach(user -> System.out.println(user));
+        listUsers.forEach(System.out::println);
         assertThat(listUsers.size()).isEqualTo(pageSize);
     }
 

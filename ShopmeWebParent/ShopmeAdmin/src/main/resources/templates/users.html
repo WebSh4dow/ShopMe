@@ -68,6 +68,27 @@
     <h1>Usuários</h1>
 </div>
 
+<div class="uk-margin uk-grid-small" uk-grid>
+    <form th:action="@{/usuarios/pagina/1}" class="uk-search uk-search-default uk-width-expand" uk-search>
+        <input type="hidden" name="sortField" th:value="${sortField}">
+        <input type="hidden" name="sortDir" th:value="${sortDir}">
+
+        <span class="uk-search-icon"></span>
+        <input class="uk-search-input uk-width-medium" type="search" name="keyword" th:value="${keyword}" placeholder="Filtrar..." required>
+        <button class="uk-button uk-button-default" type="submit">Pesquisar</button>
+        <button type="submit" class="uk-button uk-button-secondary">Limpar</button>
+
+    </form>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".uk-button-secondary").click(function(){
+            $(".uk-search-input").val('');
+        });
+    });
+</script>
+
+
 <div id="confirmModal" uk-modal>
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
