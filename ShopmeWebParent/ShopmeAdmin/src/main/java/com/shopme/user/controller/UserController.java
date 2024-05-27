@@ -1,6 +1,7 @@
 package com.shopme.user.controller;
 
 import com.shopme.application.exception.UserNotFoundException;
+import com.shopme.application.util.UserCsvExporter;
 import com.shopme.common.entity.Roles;
 import com.shopme.common.entity.User;
 import com.shopme.user.service.UserService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import static com.shopme.user.service.UserService.*;
@@ -126,11 +129,21 @@ public class UserController {
                                                 @PathVariable(name = "status")boolean active,
                                                 RedirectAttributes redirectAttributes){
     userService.updateStatusUserEnabled(code,active);
+
     String status = active ? "ativo" : "inativo";
     String message = "O usuário com codigo:" + code + " "+ "teve seu status modificado para " + status;
+
     redirectAttributes.addFlashAttribute("message",message);
     return URI_REDIRECT_USER;
 
+    }
+
+    @GetMapping("/usuarios/exportar/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<User> listUsers = userService.listAll();
+
+        UserCsvExporter exporter = new UserCsvExporter();
+        exporter.export(listUsers,response);
     }
 
 }
