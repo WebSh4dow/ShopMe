@@ -2,6 +2,7 @@ package com.shopme.user.controller;
 
 import com.shopme.application.exception.UserNotFoundException;
 import com.shopme.application.util.UserCsvExporter;
+import com.shopme.application.util.UserPdfExporter;
 import com.shopme.common.entity.Roles;
 import com.shopme.common.entity.User;
 import com.shopme.user.service.UserService;
@@ -143,6 +144,14 @@ public class UserController {
         List<User> listUsers = userService.listAll();
 
         UserCsvExporter exporter = new UserCsvExporter();
+        exporter.export(listUsers,response);
+    }
+
+    @GetMapping("/usuarios/exportar/pdf")
+    public void exportTopdf(HttpServletResponse response) throws IOException {
+        List<User> listUsers = userService.listAll();
+
+        UserPdfExporter exporter = new UserPdfExporter();
         exporter.export(listUsers,response);
     }
 
